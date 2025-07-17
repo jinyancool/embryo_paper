@@ -8,7 +8,7 @@ project <- "collabrators"
 dataset <- "wangwenjie"
 species <- "mouse"
 workdir <- glue("~/projects/{project}/analysis/{dataset}/{species}/figures/sfig6")
-workdir %>% fs::dir_create() %>% setwd()
+workdir |> fs::dir_create() |> setwd()
 
 my_theme1 <- theme_classic(base_size = 8) + 
   theme(legend.key.size = unit(3, "mm"), axis.text = element_text(color = "black"), 

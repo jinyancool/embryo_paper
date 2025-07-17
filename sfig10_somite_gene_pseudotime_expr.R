@@ -8,9 +8,9 @@ project <- "collabrators"
 dataset <- "wangwenjie"
 species <- "mouse"
 workdir <- glue("~/projects/{project}/analysis/{dataset}/{species}/figures/sfig10")
-workdir %>% fs::dir_create() %>% setwd()
+workdir |> fs::dir_create() |> setwd()
 
-yaml_fn <- "/cluster/home/danyang_jh/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
+yaml_fn <- "~/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
 cols_tissue <- jhtools::show_me_the_colors(config_fn= yaml_fn, "tissue")
 stg_cols <- jhtools::show_me_the_colors(config_fn = yaml_fn, "stage")[c("CS12", "CS14", "CS18")]
 
@@ -20,7 +20,7 @@ my_theme1 <- theme_classic(base_size = 8) +
 
 ## figS10d: monocle2 results of E11.5 somite, visium data -----
 rds_fn1 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/align_new/mtb_new/pseudotime/cds_vld.rds"
+  "~/projects/collabrators/analysis/wangwenjie/align_new/mtb_new/pseudotime/cds_vld.rds"
 cds_vld = read_rds(rds_fn1)
 
 p1 <- monocle::plot_cell_trajectory(cds_vld, cell_size= .2, color_by = "State") + 
@@ -30,7 +30,7 @@ p1 <- monocle::plot_cell_trajectory(cds_vld, cell_size= .2, color_by = "State") 
 ggsave("sfig10d_ddrtree_state.pdf", p1, width = 3, height = 2)
 
 rds_fn2 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig5d_mouse_e11.5_gene_seu1_somite2.rds"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig5d_mouse_e11.5_gene_seu1_somite2.rds"
 seu1_somite2 <- read_rds(rds_fn2)
 seu1_somite2$State <- cds_vld$State
 
@@ -44,7 +44,7 @@ ggsave("sfig10d_e11.5_somite_state_spatial.pdf", sp1, width = 3, height = 2)
 
 ## figS10e: metabolic genes heatmap -----
 rds_fn3 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/sfig10e_e11.5_somite_htp_df.rds"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/sfig10e_e11.5_somite_htp_df.rds"
 df <- read_rds(rds_fn3)
 
 pdf("sfig10e_e11.5_somite_heatmap1.pdf", width = 6, height = 8)
@@ -53,14 +53,14 @@ dev.off()
 
 ## figS10f: gene enrichment of metabolic gene cluster 4 ----
 xlsx_fn1 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/align_new/mtb_new/pseudotime_250116/mtb_gene_4clusters/enrich_kegg_res_lst.xlsx"
+  "~/projects/collabrators/analysis/wangwenjie/align_new/mtb_new/pseudotime_250116/mtb_gene_4clusters/enrich_kegg_res_lst.xlsx"
 enrich_res <- readxl::read_excel(xlsx_fn1, sheet = 4)
-enrich_res <- enrich_res %>% 
-  dplyr::mutate(bg_num = str_split(BgRatio, "/", simplify = T)[, 1] %>% as.numeric()) %>% 
-  dplyr::mutate(set_num = str_split(GeneRatio, "/", simplify = T)[, 2] %>% as.numeric()) %>% 
-  mutate(ratio = Count/bg_num) %>% mutate(generatio = Count/set_num) %>% 
-  dplyr::filter(category == "Metabolism") %>% 
-  dplyr::slice_head(n = 10) %>% dplyr::arrange(generatio) %>% 
+enrich_res <- enrich_res |> 
+  dplyr::mutate(bg_num = str_split(BgRatio, "/", simplify = T)[, 1] |> as.numeric()) |> 
+  dplyr::mutate(set_num = str_split(GeneRatio, "/", simplify = T)[, 2] |> as.numeric()) |> 
+  mutate(ratio = Count/bg_num) |> mutate(generatio = Count/set_num) |> 
+  dplyr::filter(category == "Metabolism") |> 
+  dplyr::slice_head(n = 10) |> dplyr::arrange(generatio) |> 
   mutate(Description = fct(as.character(Description)))
 pt1 <- ggplot2::ggplot(enrich_res, aes(x = generatio, y = Description, color = -log10(p.adjust), size = Count)) + 
   geom_point() + viridis::scale_color_viridis() + my_theme1 + 
@@ -71,16 +71,16 @@ ggsave("sfig10f_kegg_mtb_enrich_clust4.pdf", pt1, width = 5, height = 3)
 
 ## figS10g-j: local focus of specific genes in the selected pathways -----
 GetAllCoordinates <- function(.data) {
-  .data@images %>%
-    names() %>%
-    unique() %>%
+  .data@images |>
+    names() |>
+    unique() |>
     map_dfr(~{
       GetTissueCoordinates(
         .data,
         image = .x,
         cols = c("row", "col"),
         scale = NULL
-      ) %>%
+      ) |>
         rownames_to_column(var = "cellid")
     })
 }
@@ -100,12 +100,12 @@ celltype_isoheight_plot <- function(
     size_top = size_bg
 ) {
   
-  df <- .data@meta.data %>%
-    rownames_to_column("cellid") %>%
+  df <- .data@meta.data |>
+    rownames_to_column("cellid") |>
     inner_join(
       GetAllCoordinates(.data)
-    ) %>%
-    as_tibble() %>% mutate(row = -1 * row)
+    ) |>
+    as_tibble() |> mutate(row = -1 * row)
   
   xy_r <- max(df$col, df$row)
   
@@ -117,14 +117,14 @@ celltype_isoheight_plot <- function(
   p <- p +
     ggnewscale::new_scale_fill() +
     ggplot2::stat_density_2d_filled(
-      data = df %>% dplyr::filter(top_n),
+      data = df |> dplyr::filter(top_n),
       mapping = aes(fill = ..ndensity.., alpha = ..ndensity.. ),
       geom = "raster", contour = F
     ) +
     scale_fill_gradientn(colours = cols_fill_isoheight) + 
     ggnewscale::new_scale_fill() +
     geom_density_2d(
-      data = df %>% dplyr::filter(top_n),
+      data = df |> dplyr::filter(top_n),
       color = col_isoheight, 
       contour_var	= "ndensity", alpha = .5, 
       show.legend = T, linewidth = .2
@@ -132,7 +132,7 @@ celltype_isoheight_plot <- function(
   
   p <- p +
     geom_point(
-      data = df %>% dplyr::filter(top_n), show.legend = T, 
+      data = df |> dplyr::filter(top_n), show.legend = T, 
       color = col_top, alpha = .8, size = size_top
     ) + labs(color = 'top 10%')
   

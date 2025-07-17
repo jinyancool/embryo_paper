@@ -8,9 +8,9 @@ project <- "collabrators"
 dataset <- "wangwenjie"
 species <- "mouse"
 workdir <- glue("~/projects/{project}/analysis/{dataset}/{species}/figures/fig4")
-workdir %>% fs::dir_create() %>% setwd()
+workdir |> fs::dir_create() |> setwd()
 
-yaml_fn <- "/cluster/home/danyang_jh/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
+yaml_fn <- "~/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
 cols_tissue <- jhtools::show_me_the_colors(config_fn= yaml_fn, "tissue")
 stg_cols <- jhtools::show_me_the_colors(config_fn = yaml_fn, "stage")[c("E9.5", "E11.5", "E13.5")]
 
@@ -25,12 +25,12 @@ my_theme2 <- theme_classic(base_size = 8) + theme(legend.key.size = unit(3, 'mm'
 # fig4a: mouse regulon activity of scenic -----
 write_csv(mouseobj_full_frame, "../rds/fig4a_tf_mouseobj_full_frame.csv")
 csv_fn1 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig4a_tf_mouseobj_full_frame.csv"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig4a_tf_mouseobj_full_frame.csv"
 mouseobj_full_frame <- read_csv(csv_fn1)
-setis <- c("HNF4A(+)", "NEUROD2(+)", "GATA4(+)") %>% stringr::str_to_sentence()
+setis <- c("HNF4A(+)", "NEUROD2(+)", "GATA4(+)") |> stringr::str_to_sentence()
 parallel::mclapply(setis, function(seti){
-  p <- mouseobj_full_frame %>%
-    dplyr::filter(name == {{seti}}) %>%
+  p <- mouseobj_full_frame |>
+    dplyr::filter(name == {{seti}}) |>
     ggplot(aes(x = imagecol, y = imagerow, color = value)) +
     geom_point(size = 0.1) +
     scale_color_viridis_c() +
@@ -45,11 +45,11 @@ parallel::mclapply(setis, function(seti){
 # fig4b: human regulon activity of scenic -----
 setis <- c("HNF4A(+)", "NEUROD2(+)", "GATA4(+)")
 csv_fn2 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig4b_tf_humanobj_full_frame.csv"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig4b_tf_humanobj_full_frame.csv"
 humanobj_full_frame = read_csv(csv_fn2)
 parallel::mclapply(setis, function(seti){
-  p <- humanobj_full_frame %>%
-    dplyr::filter(name == {{seti}}) %>%
+  p <- humanobj_full_frame |>
+    dplyr::filter(name == {{seti}}) |>
     ggplot(aes(x = imagecol, y = imagerow, color = value)) +
     geom_point(size = 0.01) +
     scale_color_viridis_c() +
@@ -67,18 +67,18 @@ tbl2 <- tibble(tf = "Sox2", metabolic = c("Alanine, aspartate and glutamate meta
 tbl3 <- tibble(tf = "Gata4", metabolic = c("Biosynthesis of unsaturated fatty acids", "Citrate cycle (TCA cycle)"))
 comp_df <- bind_rows(tbl1, tbl2, tbl3)
 
-rds_fn3 <- "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig4gi_obj_lst_v2.rds"
+rds_fn3 <- "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig4gi_obj_lst_v2.rds"
 obj_lst <- read_rds(rds_fn3)
 obj1 <- obj_lst[["E115"]]
-cord_df = Seurat::GetTissueCoordinates(obj1) %>% .[colnames(obj1), ] %>% tibble() %>% 
+cord_df = Seurat::GetTissueCoordinates(obj1) |> .[colnames(obj1), ] |> tibble() |> 
   mutate(x = imagecol, y = -1 * imagerow)
 cord1 <- cbind(cord_df, obj1@meta.data)
 
 plst3 <- lapply(1:nrow(comp_df), \(idx) {
-  feat1 <- comp_df[["tf"]][idx] %>% as.character() %>% gsub(" / ", "_", x = .)
-  feat2 <- comp_df[["metabolic"]][idx] %>% as.character() %>% gsub(" / ", "_", x = .)
-  df4p <- cord1 %>% dplyr::select(all_of(c("x", "y", feat1, feat2))) %>% 
-    dplyr::rename("feat1" = feat1, "feat2" = feat2) %>% 
+  feat1 <- comp_df[["tf"]][idx] |> as.character() |> gsub(" / ", "_", x = .)
+  feat2 <- comp_df[["metabolic"]][idx] |> as.character() |> gsub(" / ", "_", x = .)
+  df4p <- cord1 |> dplyr::select(all_of(c("x", "y", feat1, feat2))) |> 
+    dplyr::rename("feat1" = feat1, "feat2" = feat2) |> 
     mutate(top = case_when((feat1 > quantile(.$feat1, .85)) & (feat2 > quantile(.$feat2, .85)) ~ "top 15%", 
                            TRUE ~ "no"))
   sp1 <- ggplot2::ggplot() + ggplot2::geom_point(
@@ -115,7 +115,7 @@ plst3 <- lapply(1:nrow(comp_df), \(idx) {
   p1 <- p + 
     ggnewscale::new_scale_fill() +
     ggplot2::stat_density_2d_filled(
-      data = df4p %>% dplyr::filter(top == "top 15%"),
+      data = df4p |> dplyr::filter(top == "top 15%"),
       mapping = aes(fill = ..ndensity.., #alpha = ..ndensity.., 
                     x = x, y = y), alpha = .5, 
       geom = "raster", contour = F, show.legend = T
@@ -126,7 +126,7 @@ plst3 <- lapply(1:nrow(comp_df), \(idx) {
     ggnewscale::new_scale_fill() +
     geom_density_2d(
       aes(x = x, y = y), 
-      data = df4p %>% dplyr::filter(top == "top 15%"),
+      data = df4p |> dplyr::filter(top == "top 15%"),
       contour_var	= "ndensity", alpha = .8, 
       show.legend = T, linewidth = .2
     ) + 

@@ -8,9 +8,9 @@ project <- "collabrators"
 dataset <- "wangwenjie"
 species <- "mouse"
 workdir <- glue("~/projects/{project}/analysis/{dataset}/{species}/figures/fig6")
-workdir %>% fs::dir_create() %>% setwd()
+workdir |> fs::dir_create() |> setwd()
 
-yaml_fn <- "/cluster/home/danyang_jh/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
+yaml_fn <- "~/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
 cols_tissue <- jhtools::show_me_the_colors(config_fn= yaml_fn, "tissue")
 stg_cols <- jhtools::show_me_the_colors(config_fn = yaml_fn, "stage")[c("E9.5", "E11.5", "E13.5")]
 
@@ -24,14 +24,14 @@ my_theme2 <- theme_classic(base_size = 8) + theme(legend.key.size = unit(3, 'mm'
 
 ## fig6b: monocle2 of gene and m/z data ----
 rds_fn1 = 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/align_new/mtb_new/pseudotime_2502011/seu1_brain2.rds"
+  "~/projects/collabrators/analysis/wangwenjie/align_new/mtb_new/pseudotime_2502011/seu1_brain2.rds"
 seu1_brain2 = read_rds(rds_fn1)
 feat1 = Seurat::SpatialFeaturePlot(seu1_brain2, features = "Pseudotime", 
                                    pt.size.factor = 1.3, image.alpha = 1) & 
   my_theme1 & coord_fixed() & viridis::scale_fill_viridis()
 ggsave("fig6b_gene_pseudotime_spatial.pdf", feat1, width = 4, height = 2)
 rds_fn2 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/align_new/mtb_new/pseudotime_2502011/monocle2_cds_vld_2e-1.rds"
+  "~/projects/collabrators/analysis/wangwenjie/align_new/mtb_new/pseudotime_2502011/monocle2_cds_vld_2e-1.rds"
 cds_vld_gene <- read_rds(rds_fn2)
 cds_vld_gene$Pseudotime <- seu1_brain2$Pseudotime
 p_traj1 <- plot_cell_trajectory(cds_vld_gene, color_by = "Pseudotime", cell_size = 5e-1) + 
@@ -41,7 +41,7 @@ ggsave(glue::glue("fig6b_pseudotime_monocle2_gene.pdf"), p_traj1,
        width = 4, height = 2)
 
 ### cds object, m/z based -----
-rds_fn3 <- "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/align_new/mtb_new/pseudotime_2502011/cds_vld_mz.rds"
+rds_fn3 <- "~/projects/collabrators/analysis/wangwenjie/align_new/mtb_new/pseudotime_2502011/cds_vld_mz.rds"
 cds_vld_mz <- read_rds(rds_fn3)
 p_traj2 <- plot_cell_trajectory(cds_vld_mz, color_by = "Pseudotime", cell_size = 5e-1) + 
   theme_classic(base_size = 8) + viridis::scale_color_viridis() + 
@@ -50,7 +50,7 @@ ggsave(glue::glue("fig6b_pseudotime_monocle2_mz.pdf"), p_traj2,
        width = 4, height = 2)
 
 rds_fn4 = 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig6b_mz_seu_obj.rds"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig6b_mz_seu_obj.rds"
 mz_brain = read_rds(rds_fn4)
 feat2 = Seurat::SpatialFeaturePlot(mz_brain, features = "Pseudotime", 
                                    pt.size.factor = 1.3) & 
@@ -61,16 +61,16 @@ ggsave("fig6b_mz_pseudotime_spatial.pdf", feat2, width = 4, height = 2)
 comp_df <- tibble(signaling = "Notch signaling pathway", 
                   metabolic = c("Glycolysis / Gluconeogenesis", "Alanine, aspartate and glutamate metabolism", 
                                 "Sphingolipid metabolism"))
-rds_fn3 <- "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig4gi_obj_lst_v2.rds"
+rds_fn3 <- "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig4gi_obj_lst_v2.rds"
 obj_lst <- read_rds(rds_fn3)
 plst3 <- list()
 for(samp in c("E115", "E135")) {
   obj1 <- obj_lst[[samp]]
   if(samp == "E115") {
-    cord_df = Seurat::GetTissueCoordinates(obj1) %>% .[colnames(obj1), ] %>% tibble() %>% 
+    cord_df = Seurat::GetTissueCoordinates(obj1) |> .[colnames(obj1), ] |> tibble() |> 
       mutate(x = imagecol, y = -1 * imagerow)
   } else {
-    cord_df = Seurat::GetTissueCoordinates(obj1) %>% .[colnames(obj1), ] %>% tibble() %>% 
+    cord_df = Seurat::GetTissueCoordinates(obj1) |> .[colnames(obj1), ] |> tibble() |> 
       mutate(x = -1 * imagecol, y = imagerow)
     
   }
@@ -78,10 +78,10 @@ for(samp in c("E115", "E135")) {
   cord1 <- cbind(cord_df, obj1@meta.data)
   
   plst3[[samp]] <- lapply(1:nrow(comp_df), \(idx) {
-    feat1 <- comp_df[["signaling"]][idx] %>% as.character() 
-    feat2 <- comp_df[["metabolic"]][idx] %>% as.character() 
-    df4p <- cord1 %>% dplyr::select(all_of(c("x", "y", feat1, feat2))) %>% 
-      dplyr::rename("feat1" = feat1, "feat2" = feat2) %>% 
+    feat1 <- comp_df[["signaling"]][idx] |> as.character() 
+    feat2 <- comp_df[["metabolic"]][idx] |> as.character() 
+    df4p <- cord1 |> dplyr::select(all_of(c("x", "y", feat1, feat2))) |> 
+      dplyr::rename("feat1" = feat1, "feat2" = feat2) |> 
       mutate(top = case_when((feat1 > quantile(.$feat1, .85)) & (feat2 > quantile(.$feat2, .85)) ~ "top 15%", 
                              TRUE ~ "no"))
     p <- ggplot2::ggplot() + 
@@ -104,7 +104,7 @@ for(samp in c("E115", "E135")) {
     p1 <- p + 
       ggnewscale::new_scale_fill() +
       ggplot2::stat_density_2d_filled(
-        data = df4p %>% dplyr::filter(top == "top 15%"),
+        data = df4p |> dplyr::filter(top == "top 15%"),
         mapping = aes(fill = ..ndensity.., #alpha = ..ndensity.., 
                       x = x, y = y), alpha = .5, 
         geom = "raster", contour = F, show.legend = T
@@ -115,7 +115,7 @@ for(samp in c("E115", "E135")) {
       ggnewscale::new_scale_fill() +
       geom_density_2d(
         aes(x = x, y = y), 
-        data = df4p %>% dplyr::filter(top == "top 15%"),
+        data = df4p |> dplyr::filter(top == "top 15%"),
         contour_var	= "ndensity", alpha = .8, 
         show.legend = T, linewidth = .2
       ) + 

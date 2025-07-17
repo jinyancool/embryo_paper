@@ -8,13 +8,13 @@ project <- "collabrators"
 dataset <- "wangwenjie"
 species <- "mouse"
 workdir <- glue("~/projects/{project}/analysis/{dataset}/{species}/figures/figS2")
-workdir %>% fs::dir_create() %>% setwd()
+workdir |> fs::dir_create() |> setwd()
 
-yaml_fn <- "/cluster/home/danyang_jh/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
+yaml_fn <- "~/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
 cols_tissue <- jhtools::show_me_the_colors(config_fn= yaml_fn, "tissue")
 stg_cols <- jhtools::show_me_the_colors(config_fn = yaml_fn, "stage")[c("CS12", "CS14", "CS18")]
 ## figS2c: plot1cell of all genes ----
-rds_fn6 <- "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/human_visium_all_gene_lst.rds"
+rds_fn6 <- "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/human_visium_all_gene_lst.rds"
 seu_new2_lst = read_rds(rds_fn6)
 for(idx in 1:length(seu_new2_lst)){
   circ_dat <- prepare_circlize_data(seu_new2_lst[[idx]], scale = .65)
@@ -32,7 +32,7 @@ for(idx in 1:length(seu_new2_lst)){
 }
 
 ## figS2c: plot1cell of mtb genes ----
-rds_fn7 <- "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/human_visium_all_gene_lst.rds"
+rds_fn7 <- "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/human_visium_all_gene_lst.rds"
 seu_new3_lst = read_rds(rds_fn7)
 for(idx in 1:length(seu_new3_lst)){
   circ_dat <- prepare_circlize_data(seu_new3_lst[[idx]], scale = .65)
@@ -52,7 +52,7 @@ for(idx in 1:length(seu_new3_lst)){
 }
 
 ## metabolic genes of each sample ---- 
-rds_fn7 <- "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/hsa_visium_mtb_gene_lst.rds"
+rds_fn7 <- "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/hsa_visium_mtb_gene_lst.rds"
 seu_new3_lst = read_rds(rds_fn7)
 for(idx in 1:length(seu_lst)){
   circ_dat <- prepare_circlize_data(seu_new3_lst[[idx]], scale = .65)

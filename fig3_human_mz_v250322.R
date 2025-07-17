@@ -8,9 +8,9 @@ project <- "collabrators"
 dataset <- "wangwenjie"
 species <- "mouse"
 workdir <- glue("~/projects/{project}/analysis/{dataset}/{species}/figures/fig3")
-workdir %>% fs::dir_create() %>% setwd()
+workdir |> fs::dir_create() |> setwd()
 
-yaml_fn <- "/cluster/home/danyang_jh/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
+yaml_fn <- "~/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
 cols_tissue <- jhtools::show_me_the_colors(config_fn = yaml_fn, "tissue")
 
 my_theme1 <- theme_classic(base_size = 8) + 
@@ -21,10 +21,10 @@ my_theme1 <- theme_classic(base_size = 8) +
 mtb_info <- read_rds("~/ref/kegg/human/hsa_mtb_pth_cpd.rds")
 xlsx_fn1 <- 
   glue("/cluster/home/jhuang/projects/collabrators/data/wangwenjie/human/metabolism/human_adjusted/DZLM2024030584-b2_DZLM2024030572-张进-王文杰-空间代谢组-项目报告/2.定性结果/Qualitative.xlsx")
-neg_anot1 <- readxl::read_excel(xlsx_fn1, sheet = "neg-all") %>% 
-  mutate(mz_id = paste0("neg-", mz)) %>% dplyr::filter(KEGG %in% mtb_info$cpd_id, !is.na(Metabolites))
-pos_anot1 <- readxl::read_excel(xlsx_fn1, sheet = "pos-all") %>% 
-  mutate(mz_id = paste0("pos-", mz)) %>% dplyr::filter(KEGG %in% mtb_info$cpd_id, !is.na(Metabolites))
+neg_anot1 <- readxl::read_excel(xlsx_fn1, sheet = "neg-all") |> 
+  mutate(mz_id = paste0("neg-", mz)) |> dplyr::filter(KEGG %in% mtb_info$cpd_id, !is.na(Metabolites))
+pos_anot1 <- readxl::read_excel(xlsx_fn1, sheet = "pos-all") |> 
+  mutate(mz_id = paste0("pos-", mz)) |> dplyr::filter(KEGG %in% mtb_info$cpd_id, !is.na(Metabolites))
 
 samples <- c("yao1", "yao2", "yao5")
 
@@ -40,20 +40,20 @@ ord_yao5 <- c("Forebrain","Midbrain","Hindbrain","Diencephalon","Spinal cord","E
 ord_lst <- list(yao1 = ord_yao1, yao2 = ord_yao2, yao5 = ord_yao5)
 
 rds_fn3 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig3ac_human_mz_dat_norm_lst.rds"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig3ac_human_mz_dat_norm_lst.rds"
 dat_norm_lst <- read_rds(rds_fn3)
 for(samp in samples) {
   dat_norm = dat_norm_lst[[samp]]
   lvls <- colnames(dat_norm)
   ## right anot ----
   nm <- rownames(dat_norm)
-  tst1 = rbind(neg_anot1, pos_anot1) %>% dplyr::filter(mz_id %in% nm) %>%
-    dplyr::select(all_of(c("mz_id", "Metabolites"))) %>% dplyr::distinct() %>%
-    dplyr::group_by(mz_id) %>% 
+  tst1 = rbind(neg_anot1, pos_anot1) |> dplyr::filter(mz_id %in% nm) |>
+    dplyr::select(all_of(c("mz_id", "Metabolites"))) |> dplyr::distinct() |>
+    dplyr::group_by(mz_id) |> 
     summarise(meta = paste0(Metabolites, collapse = "; ")) 
   mz_idx <- which(nm %in% tst1$mz_id)
-  lab_mks <- tst1 %>% as.data.frame() %>% column_to_rownames("mz_id") %>% 
-    .[nm[mz_idx], ] %>% str_wrap(., width = 30)
+  lab_mks <- tst1 |> as.data.frame() |> column_to_rownames("mz_id") |> 
+    .[nm[mz_idx], ] |> str_wrap(., width = 30)
   right_anot1 <- rowAnnotation(link = anno_mark(at = mz_idx,
                                                 labels = lab_mks,
                                                 labels_gp = gpar(fontsize = 6),
@@ -88,7 +88,7 @@ for(samp in samples) {
 
 ## fig3d: human selected tissue specific spatial distribution -----
 rds_fn4 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/human_visium_all_gene_lst.rds"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/human_visium_all_gene_lst.rds"
 hsa_visium_lst = read_rds("../rds/human_visium_all_gene_lst.rds")
 names(hsa_visium_lst) <- c("CS12", "CS14", "CS18")
 
@@ -116,7 +116,7 @@ for(samp in c("CS12", "CS14", "CS18")) {
       theme(plot.title = element_text(size = 8), plot.margin = margin(c(0, 0, 0, 0), unit = "cm")) & 
       Seurat::NoAxes() & coord_fixed()
   })
-  plst1 <- plst1 %>% patchwork::wrap_plots(nrow = 1)
+  plst1 <- plst1 |> patchwork::wrap_plots(nrow = 1)
   ggsave(glue("fig3d_human_spatial_tissue_{samp}_v250322.pdf"), plst1, 
          width = plot_width * 4, height = plot_height, units = "cm")
 }
@@ -124,9 +124,9 @@ for(samp in c("CS12", "CS14", "CS18")) {
 ## fig3g: changes among stages of human metabolites in liver -----
 csv_fn1 <- "/cluster/home/ztao_jh/projects/embryo/analysis/zhangjing/human/rnaseq/new_label/ren_time_point_2/neg/Liver.csv"
 log_fc <- read_csv(csv_fn1)
-log_fc <- log_fc %>% 
-  mutate(stage = case_when(grepl("yao1", name) ~ "CS12", grepl("yao2", name) ~ "CS14", TRUE ~ "CS18")) %>% 
-  mutate(stage = fct(as.character(stage), levels = paste0("CS1", c(2, 4, 8)))) %>% 
+log_fc <- log_fc |> 
+  mutate(stage = case_when(grepl("yao1", name) ~ "CS12", grepl("yao2", name) ~ "CS14", TRUE ~ "CS18")) |> 
+  mutate(stage = fct(as.character(stage), levels = paste0("CS1", c(2, 4, 8)))) |> 
   dplyr::filter(!grepl("Trend7", group))
 
 line1 = ggplot2::ggplot(log_fc, aes(x = stage, y = value, group = feature, color = group)) + 
@@ -139,21 +139,21 @@ ggsave("fig3g_liver_mtb_line1.pdf", line1, width = 6, height = 3)
 
 ## fig2h: moran's I changes -----
 csv_fn2 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig3h_human_mz_moran_trends.csv"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/fig3h_human_mz_moran_trends.csv"
 outcsv <- read_csv(csv_fn2)
 draw_line <- function(outcsv){
-  sigtissue <- outcsv  %>%
-    dplyr::select(feature, anot1) %>%
-    dplyr::distinct() %>%
-    group_by(anot1) %>%
-    summarise(n = n()) %>%
-    group_by(anot1) %>%
-    dplyr::filter(anot1 != "others") %>%
-    arrange(desc(n)) %>%
+  sigtissue <- outcsv  |>
+    dplyr::select(feature, anot1) |>
+    dplyr::distinct() |>
+    group_by(anot1) |>
+    summarise(n = n()) |>
+    group_by(anot1) |>
+    dplyr::filter(anot1 != "others") |>
+    arrange(desc(n)) |>
     pull(anot1)
-  outcsv %>% 
-    dplyr::filter(anot1 != "others") %>%
-    mutate(anot1 = factor(anot1, levels = sigtissue)) %>% 
+  outcsv |> 
+    dplyr::filter(anot1 != "others") |>
+    mutate(anot1 = factor(anot1, levels = sigtissue)) |> 
     ggplot(aes(x = stage, y = value, group = feature, color = anot1)) +
     geom_line() + scale_color_manual(values = cols_tissue) + 
     facet_wrap(~anot1) +
@@ -170,13 +170,13 @@ dev.off()
 
 ## fig2i: bar plot of each tissue ----
 draw_bar <- function(outcsv){
-  outcsv  %>% 
-    dplyr::select(feature, anot1) %>% 
-    dplyr::distinct() %>% 
-    group_by(anot1) %>% 
-    summarise(n = n()) %>% 
-    arrange(desc(n)) %>% 
-    mutate(label = factor(anot1, levels = anot1)) %>% 
+  outcsv  |> 
+    dplyr::select(feature, anot1) |> 
+    dplyr::distinct() |> 
+    group_by(anot1) |> 
+    summarise(n = n()) |> 
+    arrange(desc(n)) |> 
+    mutate(label = factor(anot1, levels = anot1)) |> 
     ggplot(aes(x = label, y = n, fill = label)) + 
     geom_bar(stat = "identity") +
     my_theme1 + scale_fill_manual(values = cols_tissue) + 

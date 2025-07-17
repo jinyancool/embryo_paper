@@ -8,7 +8,7 @@ project <- "collabrators"
 dataset <- "wangwenjie"
 species <- "mouse"
 workdir <- glue("~/projects/{project}/analysis/{dataset}/{species}/figures/sfig4")
-workdir %>% fs::dir_create() %>% setwd()
+workdir |> fs::dir_create() |> setwd()
 
 my_theme1 <- theme_classic(base_size = 8) + 
   theme(legend.key.size = unit(3, "mm"), axis.text = element_text(color = "black"), 
@@ -82,22 +82,22 @@ plst2 <- lapply(paste0("E", c(9.5, 11.5, 13.5)), \(stg) {
 
 ## figS4g-i: ssgsea score of KEGG pathways -----
 kegg_info <- read_csv(
-  "/cluster/home/danyang_jh/ref/kegg/mouse/kegg_mmu_all_pth_genes.csv"
+  "~/ref/kegg/mouse/kegg_mmu_all_pth_genes.csv"
 )
-kegg_pth_id <- kegg_info[, c(1, 3)] %>% dplyr::distinct()
-rds_fn2 <- "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/sfig4gi_ssgsea_score_df_lst1.rds"
+kegg_pth_id <- kegg_info[, c(1, 3)] |> dplyr::distinct()
+rds_fn2 <- "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/sfig4gi_ssgsea_score_df_lst1.rds"
 df_lst1 <- read_rds(rds_fn2)
 sel_pth1 <- 
   dplyr::filter(kegg_pth_id, 
                 grepl("(GABA|Glutamater|Taurine|Cardiac|Insulin sig|cAMP|Pentose pho|Purine|Pyrimi)", 
                       pth_name))
 p_lst1 <- lapply(1:nrow(sel_pth1), \(idx) {
-  p_df1 <- df_lst1 %>% dplyr::select(all_of(c("imagerow", "imagecol", "stage", sel_pth1[[1]][idx]))) %>%
+  p_df1 <- df_lst1 |> dplyr::select(all_of(c("imagerow", "imagecol", "stage", sel_pth1[[1]][idx]))) |>
     dplyr::rename("pth" = sel_pth1[[1]][idx])
   p_df1 <- mutate(p_df1, imagecol = case_when(stage == "E11.5" ~ imagecol, stage == "E9.5" ~ imagecol, 
                                               stage == "E13.5" ~ -1 * imagecol), 
                   imagerow = case_when(stage == "E11.5" ~ -1 * imagerow, stage == "E9.5" ~ -1 * imagerow, 
-                                       stage == "E13.5" ~ imagerow)) %>% 
+                                       stage == "E13.5" ~ imagerow)) |> 
     mutate(stage = fct(as.character(stage), levels = c("E9.5", "E11.5", "E13.5")))
   ggplot2::ggplot(p_df1, aes(x = imagecol, y = imagerow, color = pth)) +
     geom_point(size = .5) + viridis::scale_color_viridis() + facet_wrap(~ stage, scale = "free") +
@@ -112,12 +112,12 @@ sel_pth2 <-
   dplyr::filter(kegg_pth_id, 
                 grepl("(Wnt sig|Hedgehog|TGF|Notch sig|HIF|mTOR)", pth_name))
 p_lst2 <- lapply(1:nrow(sel_pth2), \(idx) {
-  p_df1 <- df_lst1 %>% dplyr::select(all_of(c("imagerow", "imagecol", "stage", sel_pth2[[1]][idx]))) %>%
+  p_df1 <- df_lst1 |> dplyr::select(all_of(c("imagerow", "imagecol", "stage", sel_pth2[[1]][idx]))) |>
     dplyr::rename("pth" = sel_pth2[[1]][idx])
   p_df1 <- mutate(p_df1, imagecol = case_when(stage == "E11.5" ~ imagecol, stage == "E9.5" ~ imagecol, 
                                               stage == "E13.5" ~ -1 * imagecol), 
                   imagerow = case_when(stage == "E11.5" ~ -1 * imagerow, stage == "E9.5" ~ -1 * imagerow, 
-                                       stage == "E13.5" ~ imagerow)) %>% 
+                                       stage == "E13.5" ~ imagerow)) |> 
     mutate(stage = fct(as.character(stage), levels = c("E9.5", "E11.5", "E13.5")))
   ggplot2::ggplot(p_df1, aes(x = imagecol, y = imagerow, color = pth)) +
     geom_point(size = .5) + viridis::scale_color_viridis() + facet_wrap(~ stage, scale = "free") +

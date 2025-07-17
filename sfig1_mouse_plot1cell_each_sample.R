@@ -8,25 +8,25 @@ project <- "collabrators"
 dataset <- "wangwenjie"
 species <- "mouse"
 workdir <- glue("~/projects/{project}/analysis/{dataset}/{species}/figures/figS1")
-workdir %>% fs::dir_create() %>% setwd()
+workdir |> fs::dir_create() |> setwd()
 
-yaml_fn <- "/cluster/home/danyang_jh/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
+yaml_fn <- "~/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
 cols_tissue <- jhtools::show_me_the_colors(config_fn= yaml_fn, "tissue")
-stg_cols <- jhtools::show_me_the_colors(config_fn= yaml_fn, "stage") %>% .[c("E9.5", "E11.5", "E13.5")] 
+stg_cols <- jhtools::show_me_the_colors(config_fn= yaml_fn, "stage") |> .[c("E9.5", "E11.5", "E13.5")] 
 
 ## figS1c: plot1cell, umap + outer circle -----
 mmu_visium_lst <- list()
 for(idx in c("E9.5", "E11.5", "E13.5")){
   # intersect_mtb_genes <- intersect(rownames(seu_lst3[[idx]]), mmu_mtb_genes)
   obj1 <- seu_lst3[[idx]]
-  obj1 <- obj1 %>% Seurat::SCTransform(assay = "Spatial") %>%
-    Seurat::RunPCA(npcs = 100) %>% Seurat::RunUMAP(dims = 1:30) %>% Seurat::RunTSNE(dims = 1:10) %>%
+  obj1 <- obj1 |> Seurat::SCTransform(assay = "Spatial") |>
+    Seurat::RunPCA(npcs = 100) |> Seurat::RunUMAP(dims = 1:30) |> Seurat::RunTSNE(dims = 1:10) |>
     Seurat::FindNeighbors(dims = 1:30)
   Idents(obj1) <- obj1$tissuetype
   mmu_visium_lst[[idx]] <- obj1
 }
 ## figS1c: all genes of each sample ----
-rds_fn2 <- "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/mmu_visium_lst.rds"
+rds_fn2 <- "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/mmu_visium_lst.rds"
 mmu_visium_lst <- read_rds(rds_fn2)
 for(idx in c("E9.5", "E11.5", "E13.5")) {
   obj1 <- mmu_visium_lst[[idx]]
@@ -46,7 +46,7 @@ for(idx in c("E9.5", "E11.5", "E13.5")) {
 }
 ## figS1c: metabolic genes of each sample ----
 rds_fn3 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/mmu_visium_mtb_gene_obj_lst.rds"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/mmu_visium_mtb_gene_obj_lst.rds"
 seu_new3_lst <- read_rds(rds_fn3)
 for(idx in 1:length(seu_new3_lst)) {
   circ_dat <- prepare_circlize_data(seu_new3_lst[[idx]], scale = .65)

@@ -8,9 +8,9 @@ project <- "collabrators"
 dataset <- "wangwenjie"
 species <- "mouse"
 workdir <- glue("~/projects/{project}/analysis/{dataset}/{species}/figures/sfig12")
-workdir %>% fs::dir_create() %>% setwd()
+workdir |> fs::dir_create() |> setwd()
 
-yaml_fn <- "/cluster/home/danyang_jh/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
+yaml_fn <- "~/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
 cols_tissue <- jhtools::show_me_the_colors(config_fn= yaml_fn, "tissue")
 stg_cols <- jhtools::show_me_the_colors(config_fn = yaml_fn, "stage")[c("CS12", "CS14", "CS18")]
 
@@ -20,7 +20,7 @@ my_theme1 <- theme_classic(base_size = 8) +
 
 ## figS12a: RCTD results1, main types distribution -----
 rds_fn1 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/sfig12a_rctd_res_df_lst1.rds"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/sfig12a_rctd_res_df_lst1.rds"
 df_lst1 <- read_rds(rds_fn1)
 lapply(c("E9.5", "E11.5", "E13.5"), \(stg) {
   if(stg == "E13.5") {
@@ -48,7 +48,7 @@ lapply(c("E9.5", "E11.5", "E13.5"), \(stg) {
 
 ## figS12b: RCTD results1, detailed types distribution in liver region -----
 rds_fn2 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/sfig12b_liver_rctd_res.rds"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/sfig12b_liver_rctd_res.rds"
 rctd_dat <- read_rds(rds_fn2)
 pie_p <- ggplot2::ggplot() +
   scatterpie::geom_scatterpie(aes(x = row, y = col), pie_scale = 1, col = NA, data = rctd_dat, 
@@ -60,7 +60,7 @@ ggsave(glue("sfig12b_liver_rctd_prop_pie.pdf"), pie_p, width = 4, height = 3)
 
 ## figS12c: RCTD weights, liver of each stage -----
 rds_fn3 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/sfig12c_visium_lst4.rds"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/sfig12c_visium_lst4.rds"
 visium_lst4 <- read_rds(rds_fn3)
 p_lst1 <- list()
 for(feat in sel_types) {
@@ -78,7 +78,7 @@ for(feat in sel_types) {
     }
     feat1 <- Seurat::SpatialFeaturePlot(seu[, !is.na(seu[[feat]])], image.alpha = 0.5, features = feat, 
                                         pt.size.factor = pt_size, stroke = NA, combine = F, crop = T)
-    feat1 <- feat1 %>% lapply(., \(p) p + Seurat::DarkTheme() + NoGrid() + NoAxes()) %>% 
+    feat1 <- feat1 |> lapply(., \(p) p + Seurat::DarkTheme() + NoGrid() + NoAxes()) |> 
       patchwork::wrap_plots() &
       paletteer::scale_fill_paletteer_c("grDevices::Viridis") & 
       theme(legend.position = "right", legend.key.size = unit(3, "mm"), 

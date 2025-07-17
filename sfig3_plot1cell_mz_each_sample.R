@@ -8,15 +8,15 @@ project <- "collabrators"
 dataset <- "wangwenjie"
 species <- "mouse"
 workdir <- glue("~/projects/{project}/analysis/{dataset}/{species}/figures/figS3")
-workdir %>% fs::dir_create() %>% setwd()
+workdir |> fs::dir_create() |> setwd()
 
-yaml_fn <- "/cluster/home/danyang_jh/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
+yaml_fn <- "~/projects/collabrators/code/wangwenjie/mouse/figures/configs.yaml"
 cols_tissue <- jhtools::show_me_the_colors(config_fn= yaml_fn, "tissue")
 cols_stg <- jhtools::show_me_the_colors(config_fn= yaml_fn, "stage")
 
 ## figS3a: plot1cell of mouse m/z merged data -----
 rds_fn1 <- 
-  "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/mouse_mz_mrg_lst.rds"
+  "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/mouse_mz_mrg_lst.rds"
 mz_mrg_lst <- read_rds(rds_fn1)
 
 stg_cols <- cols_stg[names(mz_mrg_lst)]
@@ -38,7 +38,7 @@ for(idx in 1:length(mz_mrg_lst)){
   dev.off()
 }
 
-rds_fn2 <- "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/mouse_mz_obj_merged.rds"
+rds_fn2 <- "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/mouse_mz_obj_merged.rds"
 mz_obj_mrg = read_rds(rds_fn2)
 circ_dat <- prepare_circlize_data(mz_obj_mrg, scale = .7)
 clust_cols = cols_tissue[sort(unique(circ_dat$tissuetype))]
@@ -56,7 +56,7 @@ draw(lgd_squre, x = unit(25, "mm"), y = unit(8, "mm"), just = c("right", "bottom
 dev.off()
 
 ## figS3c: plot1cell of human m/z merged data -----
-rds_fn3 <- "/cluster/home/danyang_jh/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/human_mz_mrg_lst.rds"
+rds_fn3 <- "~/projects/collabrators/analysis/wangwenjie/mouse/figures/rds/human_mz_mrg_lst.rds"
 mz_mrg_lst = read_rds(rds_fn3)
 for(idx in c("yao1", "yao2", "yao5")){
   obj1 <- mz_mrg_lst[[idx]][, !is.na(mz_mrg_lst[[idx]]$tissue)]
