@@ -1,0 +1,179 @@
+mz_id,Metabolites,important
+pos-137.04630,Hypoxanthine,TRUE
+pos-201.93199,Taurine,TRUE
+pos-446.11818,Glutamate nitrogen,TRUE
+pos-255.05889,(2S)-5-Amino-2-[(2-carboxy-2-oxoethyl)amino]-5-oxopentanoic acid; Glutamine pyruvate; Kifunensine,TRUE
+pos-90.05497,beta-Alanine; L-Alanine; Sarcosine,TRUE
+pos-253.11645,Alanyltyrosine; Serylphenylalanine; Tyrosyl-Alanine,TRUE
+pos-563.04858,"L-Alanine, N-(2,6-dichloro-4-(((3-(2-furanyl)-1-oxo-2-propenyl)amino)methyl)benzoyl)-3-(((4R)-4-thiazolidinylcarbonyl)amino)-",TRUE
+pos-398.26918,N-Docosahexaenoyl Serine,TRUE
+pos-400.34014,O-Palmitoylcarnitine,TRUE
+neg-199.93582,Taurine sulfate,TRUE
+neg-295.07093,Glutamylhydroxyproline; Hydroxyprolyl-Glutamate; gamma-Glutamylhydroxyproline,TRUE
+neg-145.05985,L-Glutamine; D-Glutamine,TRUE
+neg-327.22730,N-Lauroyl Glutamine,TRUE
+neg-389.28027,N-Linoleoyl Glutamine,TRUE
+neg-408.01033,ADP,TRUE
+neg-477.97485,"ADP, beta S",TRUE
+neg-578.00853,Cyclic ADP-ribose,TRUE
+neg-620.01566,ADP-ribose 2'-phosphate,TRUE
+neg-666.01983,"ADP-ribose 1""-2"" cyclic phosphate",TRUE
+neg-243.05980,Uridine; Pseudouridine,TRUE
+neg-287.00708,"Uridine 2',3'-cyclic phosphate",TRUE
+neg-482.96038,Uridine triphosphate,TRUE
+neg-644.02588,Uridine diphosphate-N-acetylglucosamine,TRUE
+neg-116.03373,L-2-Amino-3-oxobutanoic acid; L-Aspartate-semialdehyde,TRUE
+neg-410.24414,N-Arachidonoyl Alanine; N-Myristoyl Phenylalanine,TRUE
+neg-797.54797,N-Docosahexaenoyl Alanine; Epristeride,TRUE
+neg-436.27151,N-Arachidonoyl Serine,TRUE
+neg-174.03962,N-Acetyl-L-aspartic acid,TRUE
+pos-941.17536,(E)-Resveratrol 3-glucoside 4'-sulfate; (Z)-Resveratrol 3-glucoside 5-sulfate,FALSE
+pos-507.26015,11-Hydroxyprogesterone 11-glucuronide,FALSE
+pos-805.43922,alpha-Acetyldigoxin; 16-Acetylgitoxin; beta-Acetyldigoxin,FALSE
+pos-809.43640,Medicoside G,FALSE
+pos-853.46490,Capsicoside C3,FALSE
+pos-911.80491,TG(54:1),FALSE
+pos-529.46470,Diepomuricanin A,FALSE
+pos-711.62089,N-Palmitoyl Valine,FALSE
+pos-600.06067,"5-[4-(4-Cyanobut-1-yn-1-yl)phenyl]-1-(2,4-dichlorophenyl)-N-(1,1-dioxo-1lambda~6~,4-thiazinan-4-yl)-4-methyl-1H-pyrazole-3-carboxamide",FALSE
+pos-483.25790,Milciclib,FALSE
+pos-518.26588,LPE(18:1),FALSE
+pos-559.46903,DG(33:3),FALSE
+pos-291.06980,Inosine,FALSE
+pos-783.56429,DG(42:1),FALSE
+pos-527.15389,S-Methyl-KE-298,FALSE
+pos-509.90967,Quinoline yellow,FALSE
+pos-494.26568,Imatinib,FALSE
+pos-627.31777,Emivirine,FALSE
+pos-519.29480,Corchoroside B,FALSE
+pos-752.51930,PC(32:2),FALSE
+pos-505.27126,Menatetrenone Epoxide,FALSE
+pos-547.28797,"(S)-N-((R)-1-(Benzo[d][1,3]dioxol-5-yl)butyl)-3,3-diethyl-2-(4-(4-methylpiperazine-1-carbonyl)phenoxy)-4-oxoazetidine-1-carboxamide",FALSE
+pos-550.80243,"1,2,3,4-Tetrachloronaphthalene",FALSE
+pos-502.98795,Tetramine,FALSE
+pos-137.06874,N-Mononitrosopiperazine; 3-Amino-2-piperidone,FALSE
+pos-307.04137,3-Deoxy-D-glycero-D-galacto-2-nonulosonic acid,FALSE
+pos-494.92264,Dihydro-dids,FALSE
+pos-488.26359,"4-[(S)-((2R,5S)-4-Allyl-2,5-dimethyl-piperazin-1-yl)-(3-methoxy-phenyl)-methyl]-N,N-diethyl-benzamide",FALSE
+pos-696.61940,Cer(d42:0),FALSE
+pos-196.87439,Tetrachloroacetic acid,FALSE
+pos-667.60782,"2,4,12-Octadecatrienoic acid isobutylamide",FALSE
+pos-804.41788,Spirolide F,FALSE
+pos-309.12762,Hydroxyhexamide,FALSE
+pos-228.03498,"1-(3,4-Dichlorophenyl)-3-azabicyclo[3.1.0]hexane",FALSE
+pos-607.09124,Dinitropyrene,FALSE
+pos-517.53570,Sapiol,FALSE
+pos-525.28058,Falecalcitriol,FALSE
+pos-752.39746,Eribulin,FALSE
+pos-532.87232,"3,5-Diiodothyropropionic acid; 3-[4-(4-Hydroxyphenoxy)phenyl]-2,2-diiodopropanoic acid",FALSE
+pos-663.60328,p-coumaroyl pentose,FALSE
+pos-775.06104,Thifensulfuron-methyl,FALSE
+pos-539.30224,Ulimorelin,FALSE
+pos-666.11803,Cefbuperazone,FALSE
+pos-544.06064,"N-((S)-1-((S)-2,2-Dimethyl-1,3-dioxolan-4-yl)-2-((4-(4-(trifluoromethoxy)phenoxy)phenyl)sulfonyl)ethyl)-N-hydroxyformamide",FALSE
+pos-550.55492,Cer(d36:0),FALSE
+pos-587.33566,Inuline,FALSE
+pos-536.05362,"1-(2-Hydroxyphenylamino)-1-deoxy-beta-D-gentiobioside 1,2-carbamate",FALSE
+pos-637.33240,Agavoside A,FALSE
+pos-620.59547,Cer(d40:2),FALSE
+pos-495.27732,Anabsin; Ganosporelactone A,FALSE
+pos-823.53787,PG(38:3),FALSE
+pos-760.39734,beta-Solanine; gamma2-Solamarine,FALSE
+pos-855.46828,Hovenidulcioside B1,FALSE
+pos-599.09764,"(2S,2'R,3S,3'R,4S)-3,4',5,7-Tetrahydroxyflavan(2->7,4->8)-3,3',5,5',7-pentahydroxyflavan; ent-Epiafzelechin-(2alpha->7,4alpha->8)-catechin; Prunus inhibitor b",FALSE
+pos-529.26392,"ent-6R,16bOH,17-Trihydroxy-7-oxo-6,7-seco-19,6-kauranolide 6-O-glucoside",FALSE
+pos-555.06751,4'-O-methyl-(-)-epicatechin-5-O-beta-glucuronide,FALSE
+pos-810.43805,Kemptide,FALSE
+pos-877.47781,Valyl-prolyl-glycyl-valyl-glycine,FALSE
+pos-898.48768,Midecamycin acetate,FALSE
+pos-646.37674,Janthitrem F,FALSE
+pos-485.22932,Vistusertib,FALSE
+pos-684.12218,N-Trifluoroacetyladriamycin,FALSE
+pos-517.28852,PA(21:0),FALSE
+pos-537.04722,Ceftriaxone,FALSE
+pos-279.09555,"1-(beta-D-Ribofuranosyl)-1,4-dihydronicotinamide",FALSE
+pos-1163.64108,Ganglioside GM3 (d32:1),FALSE
+pos-625.09381,Nocodazole,FALSE
+pos-570.06532,GDP-4-Dehydro-6-L-deoxygalactose; GDP-4-Dehydro-6-deoxy-D-mannose,FALSE
+pos-636.10210,Glucosinalbin 4-(4-acetylrhamnoside),FALSE
+pos-569.07703,Nitecapone,FALSE
+pos-227.22139,N1-Acetylspermine,FALSE
+pos-501.04357,7-Amino-4-hydroxy-2-naphthalenesulfonic acid,FALSE
+pos-821.52230,N-Stearoyltaurine,FALSE
+pos-614.08944,Desmethyl Bosentan,FALSE
+pos-589.33250,PA(25:0),FALSE
+pos-517.48756,1-Hexadecanethiol,FALSE
+pos-309.19883,ar-Artemisene,FALSE
+pos-239.16006,5-Nonyltetrahydro-2-oxo-3-furancarboxylic acid,FALSE
+pos-597.05063,Castacrenin A; Castacrenin B; Castacrenin C,FALSE
+pos-506.25926,Z-Leu-Leu-Norvalinal,FALSE
+pos-738.41844,PE(15:0),FALSE
+pos-635.11610,Cefpiramide,FALSE
+pos-204.12158,L-Acetylcarnitine,FALSE
+pos-501.29383,Petasinine,FALSE
+pos-569.33229,Deoxycholic acid 3-glucuronide,FALSE
+pos-646.13719,Ladirubicin,FALSE
+pos-628.12457,Gadobutrol,FALSE
+pos-317.11187,Tyrosylhydroxyproline; gamma-Glutamylphenylalanine,FALSE
+pos-613.10483,"(2R,4'R,8a'R)-1-(2-(4-(2-(2,4-Dichlorophenoxy)acetamido)phenyl)acetyl)-6'-oxotetrahydro-2'H,6'H-spiro[pyrrolidine-2,7'-pyrrolo[2,1-b][1,3]thiazine]-4'-carboxamide",FALSE
+pos-563.33986,Pinometostat,FALSE
+pos-611.37270,Cholylglycyltyrosine,FALSE
+pos-545.31962,Cholylasparagine,FALSE
+pos-170.03202,Creatine,FALSE
+pos-222.02714,2-(4-Nitrobenzylidene)malononitrile,FALSE
+pos-171.09766,Methylglyoxal-bis-guanylhydrazone,FALSE
+pos-796.51904,PC(34:2),FALSE
+pos-824.54619,"PC(DiMe(9,3)/MonoMe(11,3)); PC(DiMe(9,3)/MonoMe(9,5)); PC(MonoMe(11,3)/DiMe(9,3))",FALSE
+pos-104.10609,Choline,FALSE
+pos-744.48087,PS(33:3),FALSE
+neg-269.20898,3-Oxohexadecanoic acid,FALSE
+neg-362.04920,Guanosine monophosphate,FALSE
+neg-539.13761,Maltotriose; Raffinose; 1-Kestose,FALSE
+neg-325.26933,"MG(17:0); 10,20-Dihydroxyeicosanoic acid",FALSE
+neg-256.05172,"4-(N,N-Dimethylsulfamoyl)-7-hydrazino-benzofurazan",FALSE
+neg-311.22085,octadecenedioate,FALSE
+neg-346.05363,Adenosine monophosphate; 3'-AMP; 2'-Deoxyguanosine 5'-monophosphate,FALSE
+neg-760.50756,PE(18:3),FALSE
+neg-356.10723,"2-[4-(3,4-Methylenedioxyphenyl)butyl]-4(1H)-quinolinone",FALSE
+neg-392.90201,"1-Chloro-4-(2,2-dichloro-1-(4-chlorophenyl)ethenyl)-3-(methylsulfonyl)benzene",FALSE
+neg-196.02371,"3-Hydroxy-2-methylpyridine-4,5-dicarboxylate",FALSE
+neg-277.07190,4-Carboxynevirapine,FALSE
+neg-134.04607,FAPy-adenine,FALSE
+neg-282.08243,N-(1-Deoxy-1-fructosyl)glycine,FALSE
+neg-130.04865,4-Amino-4-deoxyarabinose,FALSE
+neg-426.01444,Adenosine phosphosulfate,FALSE
+neg-238.07045,(3s)-3-(Benzyloxy)-L-Aspartic Acid; hydroxytyrosyl acetate,FALSE
+neg-92.02428,hydroxybutyl,FALSE
+neg-132.00977,3-Nitrobenzaldehyde; 4-Nitrobenzaldehyde,FALSE
+neg-325.06376,Flobufen,FALSE
+neg-355.18761,Cetamolol; Pamatolol,FALSE
+neg-304.05770,1-(3-Carboxypropylcarbamoyl)-5-fluorouracil,FALSE
+neg-171.00363,Phenyl vinyl sulfide,FALSE
+neg-310.10821,"[(1S,2S,4S,5S)-2-(6-Aminopurin-9-yl)-5-(hydroxymethyl)-4-bicyclo[3.1.0]hexanyl]methanol",FALSE
+neg-220.08368,2'-Deoxysepiapterin,FALSE
+neg-277.11765,Tyrosyl-Proline,FALSE
+neg-527.95246,Deoxyadenosine triphosphate,FALSE
+neg-287.21924,"(S)-10,16-Dihydroxyhexadecanoic acid",FALSE
+neg-285.20597,Hexadecanedioic acid,FALSE
+neg-297.24205,"(9S,10S)-9,10-dihydroxyoctadecanoate",FALSE
+neg-323.08292,(R)-Myclobutanil,FALSE
+neg-228.04989,4-Pyridoxic acid,FALSE
+neg-198.91344,"2,4-Dichlorophenol; 2,5-Dichlorophenol; 3,4-Dichlorophenol",FALSE
+neg-267.07134,Ethyl glucuronide,FALSE
+neg-295.22416,"12,13-DHOME",FALSE
+neg-427.28279,MG(22:4),FALSE
+neg-323.25779,(Z)-15-Oxo-11-eicosenoic acid,FALSE
+neg-221.01064,Pyrocoll,FALSE
+neg-360.96737,"D-myo-Inositol 1,4-bisphosphate",FALSE
+neg-393.26218,DG(18:0),FALSE
+neg-279.08499,Methionyl-Methionine,FALSE
+neg-247.05711,"S-2,5-Dimethyl-3-furanyl 3-methylbutanethioate",FALSE
+neg-333.09129,Penicillin G,FALSE
+neg-78.95824,Ketene; Ethynol; Oxirene,FALSE
+neg-168.06431,Norepinephrine; Pyridoxine,FALSE
+neg-115.00219,Malic acid,FALSE
+neg-278.08863,1-Methylguanosine,FALSE
+neg-186.04307,"chondroitin sulfate E (GalNAc4,6diS-GlcA), precursor 5a",FALSE
+neg-187.04016,Hexanesulfonic acid,FALSE
+neg-175.02310,Pyruvic acid,FALSE
+neg-259.96566,"2-(2,4-Dichloro-phenoxy)-N-(2-mercapto-ethyl)-acetamide",FALSE
